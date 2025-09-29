@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import { productService } from '@/services/productService';
 import { ProductFilters } from '@/components/organisms/ProductFilters';
 import { BackNavigation } from '@/components/molecules/BackNavigation';
@@ -240,8 +241,12 @@ export default function CategoryPage() {
             <main className="flex-1">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {products.map((product) => (
-                  <div key={product.id} className="bg-card rounded-lg overflow-hidden shadow-sm border">
-                    {product.imageUrl && (
+                  <Link 
+                    key={product.id} 
+                    href={`/producto/${product.id}`}
+                    className="bg-card rounded-lg overflow-hidden shadow-sm border hover:shadow-md transition-shadow duration-200"
+                  >
+                    {product.imageUrl && product.imageUrl.trim() !== '' && (
                       <div className="aspect-square overflow-hidden relative">
                         <Image
                           src={product.imageUrl}
@@ -269,7 +274,7 @@ export default function CategoryPage() {
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
               

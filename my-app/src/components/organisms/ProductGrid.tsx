@@ -2,12 +2,29 @@
 
 import { ProductCard } from "@/components/molecules/ProductCard";
 import { Button } from "@/components/ui/button";
-import { Product } from "@/types";
 import { getOptimizedImageUrl } from "@/services/cloudinary";
 import { Loader2 } from "lucide-react";
 
+// Tipo genérico que funciona con ambos modelos de Product
+export interface ProductHybrid {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  // Propiedades opcionales para compatibilidad
+  imageUrl?: string;
+  images?: string[];
+  type?: string;
+  sizes?: string[];
+  featured?: boolean;
+  inStock?: boolean;
+  stock?: number;
+  createdAt?: Date | { seconds: number; nanoseconds: number };
+  updatedAt?: Date | { seconds: number; nanoseconds: number };
+}
+
 interface ProductGridProps {
-  products: Product[];
+  products: ProductHybrid[];
   loading?: boolean;
   hasMore?: boolean;
   onLoadMore?: () => void;
@@ -37,16 +54,22 @@ export function ProductGrid({ products, loading, hasMore, onLoadMore }: ProductG
     <div>
       {/* Grid de productos */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            title={product.name}
-            description={product.description}
-            image={getOptimizedImageUrl(product.images[0], 'productCard')}
-            category={product.type}
-          />
-        ))}
+        {products.map((product) => {
+          // Manejar tanto imageUrl (nuevo) como images[] (legacy)
+          const imageUrl = product.imageUrl || (product.images && product.images[0]) || '';
+          const category = product.category || product.type || '';
+          
+          return (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.name}
+              description={product.description}
+              image={imageUrl ? getOptimizedImageUrl(imageUrl, 'productCard') : ''}
+              category={category}
+            />
+          );
+        })}
       </div>
 
       {/* Botón cargar más */}

@@ -62,10 +62,16 @@ export const cloudinaryTransformations = {
 
 // Helper para obtener URL optimizada de imagen
 export const getOptimizedImageUrl = (
-  publicId: string, 
+  imageUrlOrPublicId: string, 
   transformation: keyof typeof cloudinaryTransformations = 'productCard'
 ): string => {
-  return getCloudinaryUrl(publicId, cloudinaryTransformations[transformation]);
+  // Si ya es una URL completa, devolverla tal como está
+  if (imageUrlOrPublicId.startsWith('http://') || imageUrlOrPublicId.startsWith('https://')) {
+    return imageUrlOrPublicId;
+  }
+  
+  // Si es un publicId, construir la URL de Cloudinary
+  return getCloudinaryUrl(imageUrlOrPublicId, cloudinaryTransformations[transformation]);
 };
 
 // Widget de upload de Cloudinary (para futuras funcionalidades de admin)

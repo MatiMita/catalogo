@@ -2,42 +2,55 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { Product } from '@/types';
-import { productService } from '@/services/database';
-import { ProductImageGallery } from '@/components/molecules/ProductImageGallery';
-import { SizeSelector } from '@/components/molecules/SizeSelector';
-import { ProductGrid } from '@/components/organisms/ProductGrid';
+import { productService } from '@/services/productService';
+import { ProductGrid, ProductHybrid } from '@/components/organisms/ProductGrid';
 import { BackNavigation } from '@/components/molecules/BackNavigation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ProductPage() {
   const params = useParams();
   const productId = params.id as string;
   
-  const [product, setProduct] = useState<Product | null>(null);
-  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [product, setProduct] = useState<ProductHybrid | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<ProductHybrid[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedSize, setSelectedSize] = useState<string>('');
 
   useEffect(() => {
     async function loadProduct() {
       try {
         setLoading(true);
-        const productData = await productService.getProductById(productId);
+        const allProducts = await productService.getAllProducts();
+        const productData = allProducts.find(p => p.id === productId);
         
         if (productData) {
-          setProduct(productData);
+          // Convertir a ProductHybrid
+          const hybridProduct: ProductHybrid = {
+            ...productData,
+            id: productData.id!,
+            images: [],
+            type: 'general',
+            sizes: [],
+            inStock: (productData.stock || 0) > 0
+          };
+          setProduct(hybridProduct);
           
-          // Cargar productos relacionados
-          const related = await productService.getRelatedProducts(
-            productData.type,
-            productData.id,
-            4
-          );
+          // Cargar productos relacionados de la misma categoría
+          const related = allProducts
+            .filter(p => p.category === productData.category && p.id !== productId)
+            .slice(0, 4)
+            .map(p => ({
+              ...p,
+              id: p.id!,
+              images: [],
+              type: 'general',
+              sizes: [],
+              inStock: (p.stock || 0) > 0
+            } as ProductHybrid));
           setRelatedProducts(related);
         }
       } catch (error) {
@@ -94,24 +107,35 @@ export default function ProductPage() {
 
       {/* Producto principal */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-        {/* Galería de imágenes */}
+        {/* Imagen del producto */}
         <div>
-          <ProductImageGallery 
-            images={product.images} 
-            productName={product.name} 
-          />
+          <div className="aspect-square overflow-hidden rounded-lg bg-muted">
+            {product.imageUrl && product.imageUrl.trim() !== '' ? (
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                width={600}
+                height={600}
+                className="object-cover w-full h-full"
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full">
+                <span className="text-muted-foreground">Sin imagen</span>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Información del producto */}
         <div className="space-y-6">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Badge variant="secondary">{product.type}</Badge>
+              <Badge variant="secondary">{product.category}</Badge>
               {product.featured && (
                 <Badge variant="default">Destacado</Badge>
               )}
-              <Badge variant={product.inStock ? "default" : "destructive"}>
-                {product.inStock ? "Disponible" : "Agotado"}
+              <Badge variant={(product.stock || 0) > 0 ? "default" : "destructive"}>
+                {(product.stock || 0) > 0 ? "Disponible" : "Agotado"}
               </Badge>
             </div>
             
@@ -129,27 +153,10 @@ export default function ProductPage() {
 
           <Separator />
 
-          {/* Selector de tallas */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">Tallas Disponibles</h3>
-            <SizeSelector 
-              sizes={product.sizes}
-              selectedSize={selectedSize}
-              onSizeSelect={setSelectedSize}
-            />
-          </div>
-
-          <Separator />
-
-          {/* Información adicional */}
-          <div className="bg-muted/50 rounded-lg p-4">
-            <h3 className="font-semibold mb-2">Información del Producto</h3>
-            <div className="text-sm text-muted-foreground space-y-1">
-              <p>• Material de alta calidad</p>
-              <p>• Fácil cuidado y mantenimiento</p>
-              <p>• Diseño moderno y versátil</p>
-              <p>• Disponible en múltiples tallas</p>
-            </div>
+            <p className="text-sm text-muted-foreground">
+              Stock disponible: {product.stock || 0}
+            </p>
           </div>
         </div>
       </div>

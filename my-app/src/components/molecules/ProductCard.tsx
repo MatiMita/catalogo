@@ -24,13 +24,19 @@ export function ProductCard({
     <Link href={`/producto/${id}`}>
       <Card className={cn("group cursor-pointer transition-all hover:shadow-lg", className)}>
         <CardContent className="p-0">
-          <div className="relative aspect-square overflow-hidden rounded-t-lg">
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className="object-cover transition-transform group-hover:scale-105"
-            />
+          <div className="relative aspect-square overflow-hidden rounded-t-lg bg-muted">
+            {image && image.trim() !== '' ? (
+              <Image
+                src={image}
+                alt={title}
+                fill
+                className="object-cover transition-transform group-hover:scale-105"
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full">
+                <span className="text-muted-foreground text-sm">Sin imagen</span>
+              </div>
+            )}
             <div className="absolute top-2 right-2">
               <span className="rounded-full bg-primary px-2 py-1 text-xs text-primary-foreground">
                 {category}

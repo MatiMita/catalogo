@@ -56,37 +56,25 @@ src/components/
 
 ## ⚙️ Configuración
 
-### 1. Instalar dependencias
+### 1. Clona el repositorio
+```bash
+git clone [tu-repositorio]
+cd catalogo/my-app
+```
+
+### 2. Instala dependencias
 ```bash
 pnpm install
 ```
 
-### 2. Configurar variables de entorno
-Actualiza `.env.local` con tu configuración de Cloudinary:
-```env
-# Cloudinary Configuration
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=TU_CLOUD_NAME_AQUI
-NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=TU_UPLOAD_PRESET_AQUI
-```
+### 3. Configura las variables de entorno
+Copia `.env.example` a `.env.local` y completa con tus credenciales:
 
-### 3. Configurar Cloudinary
-1. Crea una cuenta en [Cloudinary](https://cloudinary.com)
-2. Obtén tu `cloud_name` del dashboard
-3. Crea un upload preset sin firma:
-   - Ve a Settings > Upload presets
-   - Crea un nuevo preset
-   - Marca como "Unsigned"
-   - Configura la carpeta como "productos"
-4. Actualiza las variables en `.env.local`
-
-### 4. Inicializar la base de datos
-Ejecuta el script para crear datos de ejemplo:
 ```bash
-pnpm run init-db
+cp .env.example .env.local
 ```
 
-### 5. Subir imágenes a Cloudinary
-Después de ejecutar el script de inicialización, sube imágenes para los productos usando los nombres de archivo indicados en la consola.
+**Nota**: Para producción en Vercel, configura estas variables directamente en el dashboard de Vercel. El CI/CD no necesita estas variables ya que Vercel las maneja automáticamente.
 
 ## 🚀 Comandos
 

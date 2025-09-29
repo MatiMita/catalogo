@@ -17,6 +17,8 @@ export interface Product {
   name: string;
   description: string;
   category: string;
+  type: string; // tipo de producto (camisa, pantalón, etc.)
+  sizes: string[]; // tallas disponibles
   imageUrl: string;
   stock: number;
   featured: boolean;
@@ -28,6 +30,8 @@ export interface CreateProductData {
   name: string;
   description: string;
   category: string;
+  type: string;
+  sizes: string[];
   imageUrl: string;
   stock: number;
   featured: boolean;

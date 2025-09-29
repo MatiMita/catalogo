@@ -14,6 +14,8 @@ import { AdminGuard } from '@/components/guards/AdminGuard';
 import { productService } from '@/services/productService';
 import { ImageUpload } from '@/components/ui/image-upload';
 import { CATEGORIES } from '@/constants/categories';
+import { getSizesForCategory, getProductTypesForCategory } from '@/constants/productTypes';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Edit } from 'lucide-react';
 
 export default function EditProductPage() {
@@ -21,6 +23,8 @@ export default function EditProductPage() {
     name: '',
     description: '',
     category: '',
+    type: '',
+    sizes: [] as string[],
     imageUrl: '',
     stock: 1,
     featured: false
@@ -45,6 +49,8 @@ export default function EditProductPage() {
             name: product.name,
             description: product.description,
             category: product.category,
+            type: product.type || '',
+            sizes: product.sizes || [],
             imageUrl: product.imageUrl || '',
             stock: product.stock,
             featured: product.featured
@@ -90,6 +96,24 @@ export default function EditProductPage() {
     setFormData(prev => ({
       ...prev,
       [field]: value
+    }));
+  };
+
+  const handleSizeToggle = (size: string) => {
+    setFormData(prev => ({
+      ...prev,
+      sizes: prev.sizes.includes(size)
+        ? prev.sizes.filter(s => s !== size)
+        : [...prev.sizes, size]
+    }));
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setFormData(prev => ({
+      ...prev,
+      category,
+      type: '', // Reset type when category changes
+      sizes: [] // Reset sizes when category changes
     }));
   };
 
@@ -203,7 +227,7 @@ export default function EditProductPage() {
                     <Label htmlFor="category">Categoría *</Label>
                     <Select 
                       value={formData.category}
-                      onValueChange={(value) => handleInputChange('category', value)}
+                      onValueChange={handleCategoryChange}
                       disabled={loading}
                     >
                       <SelectTrigger>
@@ -220,6 +244,29 @@ export default function EditProductPage() {
                   </div>
                 </div>
 
+                {/* Tipo de producto - solo aparece si hay categoría seleccionada */}
+                {formData.category && (
+                  <div className="space-y-2">
+                    <Label htmlFor="type">Tipo de Producto *</Label>
+                    <Select 
+                      value={formData.type}
+                      onValueChange={(value) => handleInputChange('type', value)}
+                      disabled={loading}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecciona el tipo de producto" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {getProductTypesForCategory(formData.category).map((type) => (
+                          <SelectItem key={type.value} value={type.value}>
+                            {type.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+
                 <div className="space-y-2">
                   <Label htmlFor="description">Descripción *</Label>
                   <Textarea
@@ -231,6 +278,36 @@ export default function EditProductPage() {
                     disabled={loading}
                   />
                 </div>
+
+                {/* Selector de tallas - solo aparece si hay categoría seleccionada */}
+                {formData.category && (
+                  <div className="space-y-3">
+                    <Label>Tallas Disponibles</Label>
+                    <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
+                      {getSizesForCategory(formData.category).map((size) => (
+                        <div key={size.value} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={`size-${size.value}`}
+                            checked={formData.sizes.includes(size.value)}
+                            onCheckedChange={() => handleSizeToggle(size.value)}
+                            disabled={loading}
+                          />
+                          <Label 
+                            htmlFor={`size-${size.value}`}
+                            className="text-sm font-normal cursor-pointer"
+                          >
+                            {size.label}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
+                    {formData.sizes.length > 0 && (
+                      <p className="text-xs text-muted-foreground">
+                        Tallas seleccionadas: {formData.sizes.join(', ')}
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 <ImageUpload
                   value={formData.imageUrl}

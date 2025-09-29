@@ -6,8 +6,10 @@ import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { productService, Product } from '@/services/productService';
+import { CATEGORIES } from '@/constants/categories';
 import { 
   Dialog,
   DialogContent, 
@@ -30,11 +32,20 @@ import Link from 'next/link';
 
 export default function AdminDashboard() {
   const { user, isAdmin, loading, signOut } = useAdminAuth();
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
   const [deleting, setDeleting] = useState(false);
+  
+  // Estados para filtros
+  const [filters, setFilters] = useState({
+    category: 'all',
+    featured: 'all',
+    inStock: 'all'
+  });
+  
   const router = useRouter();
 
   useEffect(() => {
@@ -53,6 +64,7 @@ export default function AdminDashboard() {
     try {
       setLoadingProducts(true);
       const products = await productService.getAllProducts();
+      setAllProducts(products);
       setProducts(products);
     } catch (error) {
       console.error('Error cargando productos:', error);
@@ -60,6 +72,31 @@ export default function AdminDashboard() {
       setLoadingProducts(false);
     }
   };
+
+  // Aplicar filtros
+  useEffect(() => {
+    let filtered = [...allProducts];
+
+    if (filters.category && filters.category !== 'all') {
+      filtered = filtered.filter(product => product.category === filters.category);
+    }
+
+
+
+    if (filters.featured === 'true') {
+      filtered = filtered.filter(product => product.featured);
+    } else if (filters.featured === 'false') {
+      filtered = filtered.filter(product => !product.featured);
+    }
+
+    if (filters.inStock === 'true') {
+      filtered = filtered.filter(product => (product.stock || 0) > 0);
+    } else if (filters.inStock === 'false') {
+      filtered = filtered.filter(product => (product.stock || 0) === 0);
+    }
+
+    setProducts(filtered);
+  }, [allProducts, filters]);
 
   const handleSignOut = async () => {
     try {
@@ -176,8 +213,85 @@ export default function AdminDashboard() {
         </div>
 
         {/* Actions */}
+        {/* Filtros */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle className="text-lg">Filtros</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Categoría</label>
+                <Select 
+                  value={filters.category}
+                  onValueChange={(value) => setFilters(prev => ({ ...prev, category: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Todas las categorías" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Todas las categorías</SelectItem>
+                    {CATEGORIES.map((category) => (
+                      <SelectItem key={category.value} value={category.value}>
+                        {category.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Destacados</label>
+                <Select 
+                  value={filters.featured}
+                  onValueChange={(value) => setFilters(prev => ({ ...prev, featured: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Todos" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Todos</SelectItem>
+                    <SelectItem value="true">Solo destacados</SelectItem>
+                    <SelectItem value="false">No destacados</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Stock</label>
+                <Select 
+                  value={filters.inStock}
+                  onValueChange={(value) => setFilters(prev => ({ ...prev, inStock: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Todos" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Todos</SelectItem>
+                    <SelectItem value="true">Con stock</SelectItem>
+                    <SelectItem value="false">Sin stock</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Botón para limpiar filtros */}
+            <div className="mt-4 flex justify-end">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => setFilters({ category: 'all', featured: 'all', inStock: 'all' })}
+              >
+                Limpiar filtros
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Productos</h2>
+          <h2 className="text-xl font-semibold">
+            Productos ({products.length})
+          </h2>
           <Button asChild>
             <Link href="/admin/products/new">
               <Plus className="h-4 w-4 mr-2" />
