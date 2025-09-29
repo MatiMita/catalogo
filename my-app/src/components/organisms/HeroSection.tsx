@@ -14,7 +14,7 @@ export function HeroSection() {
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
             Descubre una amplia selección de productos de alta calidad. 
-            Desde ropa para niños hasta moda masculina, explora nuestro catálogo completo.
+            Desde ropa para niños hasta moda masculina y femenina explora nuestro catálogo completo.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
