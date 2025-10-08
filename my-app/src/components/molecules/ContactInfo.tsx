@@ -1,6 +1,6 @@
 import { ContactItem } from "@/components/atoms/ContactItem";
 import { SocialIcon } from "@/components/atoms/SocialIcon";
-import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
 
 export function ContactInfo() {
   return (
@@ -11,8 +11,8 @@ export function ContactInfo() {
           <ContactItem
             icon={Phone}
             label="Teléfono"
-            value="+1 (555) 123-4567"
-            href="tel:+15551234567"
+            value="+(591) 61675074"
+            href="tel:+59161675074"
           />
           <ContactItem
             icon={Mail}
@@ -23,7 +23,8 @@ export function ContactInfo() {
           <ContactItem
             icon={MapPin}
             label="Dirección"
-            value="123 Calle Principal, Ciudad, País"
+            value="Cochabamba, Bolivia"
+            href="https://maps.app.goo.gl/ALiUpkdY1G4gzhxe7"
           />
         </div>
       </div>
@@ -33,18 +34,13 @@ export function ContactInfo() {
         <div className="flex gap-3">
           <SocialIcon
             icon={Facebook}
-            href="https://facebook.com"
+            href="https://www.facebook.com/profile.php?id=61582022907209"
             label="Facebook"
           />
           <SocialIcon
             icon={Instagram}
             href="https://instagram.com"
             label="Instagram"
-          />
-          <SocialIcon
-            icon={Twitter}
-            href="https://twitter.com"
-            label="Twitter"
           />
         </div>
       </div>

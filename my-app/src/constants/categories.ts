@@ -1,7 +1,8 @@
 // Categorías válidas del sistema
 export const CATEGORIES = [
   { value: 'niño', label: 'Ropa para Niño' },
-  { value: 'hombre', label: 'Ropa para Hombre' }
+  { value: 'hombre', label: 'Ropa para Hombre' },
+  { value: 'mujer', label: 'Ropa para Mujer' }
 ] as const;
 
 export type CategoryValue = typeof CATEGORIES[number]['value'];

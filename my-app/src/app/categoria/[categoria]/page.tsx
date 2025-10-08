@@ -105,7 +105,14 @@ export default function CategoryPage() {
     // Filtrar por tipo si está seleccionado
     if (filters.type) {
       console.log('🔖 Filtrando por tipo:', filters.type);
-      filtered = filtered.filter(product => product.type === filters.type);
+      filtered = filtered.filter(product => {
+        // Buscar el tipo tanto por slug como por nombre
+        const typeMatch = product.type === filters.type || 
+                         productTypes.find(pt => pt.slug === filters.type)?.name === product.type ||
+                         productTypes.find(pt => pt.id === filters.type)?.slug === product.type;
+        console.log(`Producto: ${product.name}, Tipo: "${product.type}", Filtro: "${filters.type}", Coincide: ${typeMatch}`);
+        return typeMatch;
+      });
     }
 
     // Filtrar por tallas si hay alguna seleccionada
@@ -158,6 +165,8 @@ export default function CategoryPage() {
         return 'Ropa para Niño';
       case 'hombre':
         return 'Ropa para Hombre';
+      case 'mujer':
+        return 'Ropa para Mujer';
       default:
         return decodedCat.charAt(0).toUpperCase() + decodedCat.slice(1);
     }
@@ -230,7 +239,12 @@ export default function CategoryPage() {
             {/* Filtros laterales */}
             <aside className="lg:w-80 lg:flex-shrink-0">
               <ProductFilters
-                productTypes={productTypes.filter((type: ProductType) => type.category === decodeURIComponent(params.categoria as string))}
+                productTypes={productTypes.filter((type: ProductType) => {
+                  const decodedCategory = decodeURIComponent(params.categoria as string);
+                  console.log('🔍 Filtrando tipos para categoría:', decodedCategory);
+                  console.log('🔍 Tipo:', type.name, 'Categoría del tipo:', type.category);
+                  return type.category === decodedCategory;
+                })}
                 filters={filters}
                 onFiltersChange={handleFiltersChange}
                 onClearFilters={handleClearFilters}

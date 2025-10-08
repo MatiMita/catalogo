@@ -13,7 +13,7 @@ export function CategoriesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {/* Ropa para Niño */}
           <Link 
             href="/categoria/niño"
@@ -56,10 +56,31 @@ export function CategoriesSection() {
             </div>
           </Link>
 
+          {/* Ropa para Mujer */}
+          <Link 
+            href="/categoria/mujer"
+            className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+          >
+            <div className="aspect-[4/3] bg-gradient-to-br from-pink-100 to-rose-100 p-8 flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-6xl mb-4">👩</div>
+                <h3 className="text-xl font-bold text-gray-800">Ropa para Mujer</h3>
+              </div>
+            </div>
+            <div className="p-6">
+              <p className="text-muted-foreground mb-4">
+                Moda femenina elegante y moderna. Jeans de alta calidad para todas las ocasiones.
+              </p>
+              <span className="text-primary font-medium group-hover:underline">
+                Ver productos →
+              </span>
+            </div>
+          </Link>
+
           {/* Todos los Productos */}
           <Link 
             href="/productos"
-            className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 md:col-span-2 lg:col-span-1"
+            className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
           >
             <div className="aspect-[4/3] bg-gradient-to-br from-green-100 to-teal-100 p-8 flex items-center justify-center">
               <div className="text-center">

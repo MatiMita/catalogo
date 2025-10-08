@@ -12,8 +12,9 @@ interface ProductFiltersProps {
   onClearFilters: () => void;
 }
 
-const adultSizes = ["XS", "S", "M", "L", "XL", "XXL"];
-const childSizes = ["2", "4", "6", "8", "10", "12", "14", "16"];
+const menSizes = ["XS", "S", "M", "L", "XL", "XXL"];
+const womenSizes = ["34", "36", "38", "40", "42", "44"];
+const childSizes = ["4", "6", "8", "10", "12", "14"];
 
 export function ProductFilters({
   productTypes,
@@ -23,7 +24,8 @@ export function ProductFilters({
 }: ProductFiltersProps) {
   // Determinar qué tallas mostrar basado en la categoría
   const isChildCategory = productTypes.some(type => type.category === 'niño');
-  const sizes = isChildCategory ? childSizes : adultSizes;
+  const isWomenCategory = productTypes.some(type => type.category === 'mujer');
+  const sizes = isChildCategory ? childSizes : (isWomenCategory ? womenSizes : menSizes);
   const handleTypeChange = (type: string, checked: boolean) => {
     if (checked) {
       onFiltersChange({ ...filters, type });

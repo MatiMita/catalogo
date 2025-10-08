@@ -343,7 +343,8 @@ export default function AdminDashboard() {
                       {product.stock > 0 ? "En stock" : "Agotado"}
                     </Badge>
                     <Badge variant="outline">
-                      {product.category === 'niño' ? 'Niños' : 'Hombres'}
+                      {product.category === 'niño' ? 'Niños' : 
+                       product.category === 'mujer' ? 'Mujeres' : 'Hombres'}
                     </Badge>
                   </div>
                 </CardHeader>

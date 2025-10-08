@@ -28,15 +28,32 @@ export default function ProductPage() {
         const productData = allProducts.find(p => p.id === productId);
         
         if (productData) {
+          // Debug: Verificar los datos del producto
+          console.log('📦 Producto cargado:', productData);
+          console.log('📏 Tallas del producto:', productData.sizes);
+          
+          // Determinar tallas basadas en la categoría si no hay tallas específicas
+          let productSizes = productData.sizes || [];
+          if (!productSizes.length) {
+            // Asignar tallas por defecto según la categoría
+            productSizes = productData.category === 'niño' 
+              ? ['2', '4', '6', '8', '10', '12'] 
+              : ['S', 'M', 'L', 'XL', 'XXL'];
+          }
+          
           // Convertir a ProductHybrid
           const hybridProduct: ProductHybrid = {
             ...productData,
             id: productData.id!,
-            images: [],
-            type: 'general',
-            sizes: [],
+            images: productData.imageUrl ? [productData.imageUrl] : [],
+            type: productData.type || 'general',
+            sizes: productSizes,
             inStock: (productData.stock || 0) > 0
           };
+          
+          console.log('🔄 Producto convertido:', hybridProduct);
+          console.log('📏 Tallas finales:', hybridProduct.sizes);
+          
           setProduct(hybridProduct);
           
           // Cargar productos relacionados de la misma categoría
@@ -46,9 +63,9 @@ export default function ProductPage() {
             .map(p => ({
               ...p,
               id: p.id!,
-              images: [],
-              type: 'general',
-              sizes: [],
+              images: p.imageUrl ? [p.imageUrl] : [],
+              type: p.type || 'general',
+              sizes: p.sizes || [],
               inStock: (p.stock || 0) > 0
             } as ProductHybrid));
           setRelatedProducts(related);
@@ -150,6 +167,31 @@ export default function ProductPage() {
               {product.description}
             </p>
           </div>
+
+          <Separator />
+
+          {/* Selector de tallas */}
+          {product.sizes && product.sizes.length > 0 ? (
+            <div>
+              <h3 className="text-lg font-semibold mb-3">Tallas Disponibles</h3>
+              <div className="flex flex-wrap gap-2">
+                {product.sizes.map((size) => (
+                  <Badge
+                    key={size}
+                    variant="outline"
+                    className="px-4 py-2 text-sm cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors border-2"
+                  >
+                    {size}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <h3 className="text-lg font-semibold mb-3">Tallas</h3>
+              <p className="text-muted-foreground">No hay tallas especificadas para este producto</p>
+            </div>
+          )}
 
           <Separator />
 

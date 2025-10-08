@@ -19,6 +19,13 @@ const categories = [
     description: 'Moda masculina elegante y versátil para todas las ocasiones',
     image: 'categoria-hombre',
     productCount: 0
+  },
+  {
+    name: 'Ropa para Mujer',
+    slug: 'mujer',
+    description: 'Moda femenina elegante y moderna para todas las ocasiones',
+    image: 'categoria-mujer',
+    productCount: 0
   }
 ];
 
@@ -36,7 +43,10 @@ const productTypes = [
   { name: 'Camisetas', slug: 'camisetas-hombre', category: 'hombre', description: 'Camisetas casuales y deportivas' },
   { name: 'Pantalones', slug: 'pantalones-hombre', category: 'hombre', description: 'Pantalones formales e informales' },
   { name: 'Jeans', slug: 'jeans', category: 'hombre', description: 'Denim de calidad premium' },
-  { name: 'Chaquetas', slug: 'chaquetas', category: 'hombre', description: 'Chaquetas para todas las temporadas' }
+  { name: 'Chaquetas', slug: 'chaquetas', category: 'hombre', description: 'Chaquetas para todas las temporadas' },
+  
+  // Para mujeres
+  { name: 'Jean', slug: 'jean', category: 'mujer', description: 'Jeans modernos y cómodos para mujer' }
 ];
 
 // Datos de ejemplo para productos
@@ -142,6 +152,38 @@ const sampleProducts = [
     sizes: ['S', 'M', 'L', 'XL'],
     images: ['sample-bomber-negra'],
     featured: true,
+    inStock: true
+  },
+
+  // Productos para mujeres
+  {
+    name: 'Jean Skinny Azul',
+    description: 'Jean skinny de corte moderno en denim de alta calidad. Perfecto para cualquier ocasión.',
+    category: 'mujer',
+    type: 'jean',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: ['sample-jean-skinny-azul'],
+    featured: true,
+    inStock: true
+  },
+  {
+    name: 'Jean Mom Vintage',
+    description: 'Jean mom de tiro alto con estilo vintage. Cómodo y a la moda para looks casuales.',
+    category: 'mujer',
+    type: 'jean',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: ['sample-jean-mom-vintage'],
+    featured: false,
+    inStock: true
+  },
+  {
+    name: 'Jean Recto Clásico',
+    description: 'Jean de corte recto clásico en denim suave. Versátil y cómodo para uso diario.',
+    category: 'mujer',
+    type: 'jean',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: ['sample-jean-recto-clasico'],
+    featured: false,
     inStock: true
   }
 ];

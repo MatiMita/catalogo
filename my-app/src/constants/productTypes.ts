@@ -10,7 +10,6 @@ export interface ProductTypesByCategory {
 // Tallas por categoría
 export const SIZES_BY_CATEGORY: ProductTypesByCategory = {
   'niño': [
-    { value: '2', label: '2' },
     { value: '4', label: '4' },
     { value: '6', label: '6' },
     { value: '8', label: '8' },
@@ -25,6 +24,14 @@ export const SIZES_BY_CATEGORY: ProductTypesByCategory = {
     { value: 'L', label: 'L' },
     { value: 'XL', label: 'XL' },
     { value: 'XXL', label: 'XXL' }
+  ],
+  'mujer': [
+    { value: '34', label: '34' },
+    { value: '36', label: '36' },
+    { value: '38', label: '38' },
+    { value: '40', label: '40' },
+    { value: '42', label: '42' },
+    { value: '44', label: '44' }
   ]
 };
 
@@ -48,21 +55,33 @@ export const PRODUCT_TYPES_BY_CATEGORY: ProductTypesByCategory = {
     { value: 'chaqueta', label: 'Chaqueta' },
     { value: 'sueter', label: 'Suéter' },
     { value: 'pijama', label: 'Pijama' },
-    { value: 'uniforme', label: 'Uniforme Escolar' }
+    { value: 'uniforme', label: 'Uniforme Escolar' },
+    { value: 'jeans', label: 'Jeans' },
+    { value: 'poleras-cuello-redondo', label: 'Poleras cuello redondo' },
+    { value: 'polos', label: 'Polos' },
+    { value: 'chaleco', label: 'Chaleco' }
   ],
   'hombre': [
     { value: 'camisa', label: 'Camisa' },
+    { value: 'camisa-manga-larga', label: 'Camisa manga larga' },
+    { value: 'camisa-manga-corta', label: 'Camisa manga corta' },
     { value: 'camiseta', label: 'Camiseta' },
     { value: 'polo', label: 'Polo' },
+    { value: 'poleras-cuello-redondo', label: 'Poleras cuello redondo' },
     { value: 'pantalon', label: 'Pantalón' },
-    { value: 'jean', label: 'Jean' },
+    { value: 'pantalon-tela-vestir', label: 'Pantalón de tela vestir' },
+    { value: 'jean', label: 'Jeans' },
     { value: 'short', label: 'Short' },
     { value: 'zapatos', label: 'Zapatos' },
     { value: 'zapatillas', label: 'Zapatillas' },
     { value: 'chaqueta', label: 'Chaqueta' },
+    { value: 'chamarras', label: 'Chamarras' },
     { value: 'saco', label: 'Saco' },
-    { value: 'chaleco', label: 'Chaleco' },
+    { value: 'chalecos', label: 'Chalecos' },
     { value: 'sueter', label: 'Suéter' }
+  ],
+  'mujer': [
+    { value: 'jean', label: 'Jean' }
   ]
 };
 
