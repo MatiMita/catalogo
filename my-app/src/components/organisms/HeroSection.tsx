@@ -1,5 +1,8 @@
+'use client';
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -17,14 +20,13 @@ export function HeroSection() {
             Desde ropa para niños hasta moda masculina y femenina explora nuestro catálogo completo.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-6">
-              Ver Catálogo
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-6">
-              Contactar
-            </Button>
+          <div className="flex justify-center">
+            <Link href="/productos">
+              <Button size="lg" className="text-lg px-8 py-6">
+                Ver Catálogo
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
