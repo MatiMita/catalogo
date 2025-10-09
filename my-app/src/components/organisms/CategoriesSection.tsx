@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function CategoriesSection() {
   return (
@@ -19,10 +20,17 @@ export function CategoriesSection() {
             href="/categoria/niño"
             className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="aspect-[4/3] bg-gradient-to-br from-blue-100 to-purple-100 p-8 flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-6xl mb-4">👶</div>
-                <h3 className="text-xl font-bold text-gray-800">Ropa para Niño</h3>
+            <div className="aspect-[4/3] relative overflow-hidden">
+              <Image
+                src="https://pyunicentroprod.vtexassets.com/arquivos/ids/1734785/IMG-EC046933-7800218-01.jpg?v=638836015733030000"
+                alt="Ropa para Niño"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <h3 className="text-xl font-bold">Ropa para Niño</h3>
+                </div>
               </div>
             </div>
             <div className="p-6">
@@ -40,10 +48,17 @@ export function CategoriesSection() {
             href="/categoria/hombre"
             className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-blue-100 p-8 flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-6xl mb-4">👨</div>
-                <h3 className="text-xl font-bold text-gray-800">Ropa para Hombre</h3>
+            <div className="aspect-[4/3] relative overflow-hidden">
+              <Image
+                src="https://i.pinimg.com/564x/7c/7e/0d/7c7e0d66e2cec6e211eb3dcf714d09e0.jpg"
+                alt="Ropa para Hombre"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <h3 className="text-xl font-bold">Ropa para Hombre</h3>
+                </div>
               </div>
             </div>
             <div className="p-6">
@@ -61,10 +76,17 @@ export function CategoriesSection() {
             href="/categoria/mujer"
             className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="aspect-[4/3] bg-gradient-to-br from-pink-100 to-rose-100 p-8 flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-6xl mb-4">👩</div>
-                <h3 className="text-xl font-bold text-gray-800">Ropa para Mujer</h3>
+            <div className="aspect-[4/3] relative overflow-hidden">
+              <Image
+                src="https://m.media-amazon.com/images/I/61fhwi87lyL._UY1000_.jpg"
+                alt="Ropa para Mujer"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <h3 className="text-xl font-bold">Ropa para Mujer</h3>
+                </div>
               </div>
             </div>
             <div className="p-6">

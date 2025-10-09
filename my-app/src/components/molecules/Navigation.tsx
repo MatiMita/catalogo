@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from "react";
 import { Logo } from "@/components/atoms/Logo";
 import {
   NavigationMenu,
@@ -6,6 +9,8 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
 const navigationItems = [
   {
@@ -31,10 +36,21 @@ const navigationItems = [
 ];
 
 export function Navigation() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="flex items-center justify-between w-full">
       <Logo />
       
+      {/* Desktop Navigation */}
       <NavigationMenu className="hidden md:flex">
         <NavigationMenuList>
           {navigationItems.map((item) => (
@@ -53,6 +69,36 @@ export function Navigation() {
           ))}
         </NavigationMenuList>
       </NavigationMenu>
+
+      {/* Mobile Menu Button */}
+      <button
+        className="md:hidden p-2 hover:bg-accent rounded-md transition-colors"
+        onClick={toggleMenu}
+        aria-label="Toggle menu"
+      >
+        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      {/* Mobile Navigation Menu */}
+      {isMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-background border-b shadow-lg md:hidden z-50">
+          <nav className="container mx-auto px-4 py-4">
+            <ul className="space-y-4">
+              {navigationItems.map((item) => (
+                <li key={item.title}>
+                  <Link
+                    href={item.href}
+                    className="block px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground rounded-md transition-colors"
+                    onClick={closeMenu}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      )}
     </div>
   );
 }
