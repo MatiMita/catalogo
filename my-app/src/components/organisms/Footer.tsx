@@ -4,7 +4,7 @@ import { Facebook, Instagram, Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-muted/50 border-t">
+    <footer className="bg-gradient-to-r from-orange-50 via-purple-50 to-gray-50 border-t border-orange-200">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Logo y descripción */}

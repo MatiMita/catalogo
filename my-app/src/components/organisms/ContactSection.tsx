@@ -5,11 +5,11 @@ import { Send } from "lucide-react";
 
 export function ContactSection() {
   return (
-    <section className="py-16 bg-background" id="contacto">
+    <section className="py-16 bg-gradient-to-br from-orange-50/50 via-purple-50/30 to-background" id="contacto">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-            Contáctanos
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4 text-orange-900">
+            🎃 Contáctanos 👻
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             ¿Tienes alguna pregunta? Estamos aquí para ayudarte. Ponte en contacto con nosotros.

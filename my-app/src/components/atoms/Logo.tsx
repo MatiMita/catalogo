@@ -13,9 +13,9 @@ export function Logo({ className, size = "md" }: LogoProps) {
   };
 
   return (
-    <div className={cn("font-bold text-primary", sizeClasses[size], className)}>
-      <span className="text-primary">O</span>
-      <span className="text-accent-foreground">&amp;C</span>
+    <div className={cn("font-bold", sizeClasses[size], className)}>
+      <span className="text-orange-600">🎃O</span>
+      <span className="text-purple-600">&amp;C👻</span>
     </div>
   );
 }

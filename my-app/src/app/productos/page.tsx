@@ -36,7 +36,7 @@ export default function ProductsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50/30 via-purple-50/20 to-background">
       <div className="container mx-auto px-4 py-8">
         <BackNavigation
           backUrl="/"
@@ -47,8 +47,8 @@ export default function ProductsPage() {
         <div className="mt-8">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold tracking-tight mb-4">
-              Todos los Productos
+            <h1 className="text-3xl font-bold tracking-tight mb-4 text-orange-900">
+              🎃 Todos los Productos 👻
             </h1>
             <p className="text-muted-foreground">
               {products.length} {products.length === 1 ? 'producto encontrado' : 'productos encontrados'}

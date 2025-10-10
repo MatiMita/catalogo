@@ -15,7 +15,7 @@ import {
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 min-h-screen bg-gradient-to-br from-orange-50/30 via-purple-50/20 to-background">
       {/* Navegación */}
       <BackNavigation
         backUrl="/"
@@ -24,8 +24,8 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <section className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">
-          Sobre <span className="text-primary">O&C</span>
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-orange-900">
+          🎃 Sobre <span className="text-orange-600">O&C</span> 👻
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
           Somos una empresa familiar dedicada a mostrar ropa de calidad para toda la familia. 

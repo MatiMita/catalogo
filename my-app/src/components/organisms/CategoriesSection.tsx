@@ -3,14 +3,14 @@ import Image from "next/image";
 
 export function CategoriesSection() {
   return (
-    <section className="bg-muted/50 py-16">
+    <section className="bg-gradient-to-br from-orange-50 via-purple-50 to-gray-100 py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Explora Nuestras Categorías
+            🎃 Explora Nuestras Categorías Espeluznantes 🎃
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Encuentra exactamente lo que buscas navegando por nuestras categorías principales
+            👻 Encuentra exactamente lo que buscas navegando por nuestras categorías de miedo 🦇
           </p>
         </div>
 
@@ -27,18 +27,18 @@ export function CategoriesSection() {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-t from-orange-900/60 to-purple-900/20 flex items-center justify-center">
                 <div className="text-center text-white">
-                  <h3 className="text-xl font-bold">Ropa para Niño</h3>
+                  <h3 className="text-xl font-bold">👻 Ropa para Niño 🎃</h3>
                 </div>
               </div>
             </div>
             <div className="p-6">
               <p className="text-muted-foreground mb-4">
-                Ropa cómoda y divertida para los más pequeños. Camisetas, pantalones, shorts y más.
+                Ropa terroríficamente cómoda para los pequeños monstruitos 🧛‍♂️ Camisetas, pantalones, shorts y más.
               </p>
-              <span className="text-primary font-medium group-hover:underline">
-                Ver productos →
+              <span className="text-orange-600 font-medium group-hover:underline">
+                Ver productos espeluznantes 🕸️
               </span>
             </div>
           </Link>
@@ -55,18 +55,18 @@ export function CategoriesSection() {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-t from-orange-900/60 to-purple-900/20 flex items-center justify-center">
                 <div className="text-center text-white">
-                  <h3 className="text-xl font-bold">Ropa para Hombre</h3>
+                  <h3 className="text-xl font-bold">🦇 Ropa para Hombre 🕷️</h3>
                 </div>
               </div>
             </div>
             <div className="p-6">
               <p className="text-muted-foreground mb-4">
-                Moda masculina elegante y versátil. Camisas, jeans, chaquetas y mucho más.
+                Moda masculina diabólicamente elegante 😈 Camisas, jeans, chaquetas y mucho más de miedo.
               </p>
-              <span className="text-primary font-medium group-hover:underline">
-                Ver productos →
+              <span className="text-orange-600 font-medium group-hover:underline">
+                Ver productos siniestros 🌙
               </span>
             </div>
           </Link>
@@ -83,18 +83,18 @@ export function CategoriesSection() {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-t from-orange-900/60 to-purple-900/20 flex items-center justify-center">
                 <div className="text-center text-white">
-                  <h3 className="text-xl font-bold">Ropa para Mujer</h3>
+                  <h3 className="text-xl font-bold">🧙‍♀️ Ropa para Mujer 🖤</h3>
                 </div>
               </div>
             </div>
             <div className="p-6">
               <p className="text-muted-foreground mb-4">
-                Moda femenina elegante y moderna. Jeans de alta calidad para todas las ocasiones.
+                Moda femenina encantadoramente elegante ✨ Jeans de alta calidad para todas las ocasiones brujas.
               </p>
-              <span className="text-primary font-medium group-hover:underline">
-                Ver productos →
+              <span className="text-orange-600 font-medium group-hover:underline">
+                Ver productos hechizantes 🔮
               </span>
             </div>
           </Link>
@@ -104,18 +104,18 @@ export function CategoriesSection() {
             href="/productos"
             className="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="aspect-[4/3] bg-gradient-to-br from-green-100 to-teal-100 p-8 flex items-center justify-center">
+            <div className="aspect-[4/3] bg-gradient-to-br from-orange-200 to-purple-200 p-8 flex items-center justify-center">
               <div className="text-center">
-                <div className="text-6xl mb-4">🛍️</div>
-                <h3 className="text-xl font-bold text-gray-800">Ver Todo</h3>
+                <div className="text-6xl mb-4">🎃🛍️👻</div>
+                <h3 className="text-xl font-bold text-gray-800">Ver Todo el Terror</h3>
               </div>
             </div>
             <div className="p-6">
               <p className="text-muted-foreground mb-4">
-                Explora nuestro catálogo completo con filtros avanzados para encontrar exactamente lo que buscas.
+                Explora nuestro catálogo completo de productos escalofriantes 🕸️ Filtros avanzados para encontrar lo que buscas.
               </p>
-              <span className="text-primary font-medium group-hover:underline">
-                Ver catálogo completo →
+              <span className="text-orange-600 font-medium group-hover:underline">
+                Ver catálogo completo de miedo 🌙
               </span>
             </div>
           </Link>
